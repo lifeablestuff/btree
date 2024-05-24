@@ -1,5 +1,8 @@
 #include <iostream>
 #include <queue>
+
+
+
 using namespace std;
 
 struct node{
@@ -119,12 +122,17 @@ void insert(node* &nd, int c){  // inserts with order
 
 	
 void btfree(node* root){ //which order should deleting be: (pre, in, post ) only one of them will work
-    
-    if (root->left == 0){
-        delete root;
+    if (root != 0){
+        if (root->left != 0 || root->right != 0){
+            postwalk(root->left);
+            postwalk(root->right);
+            delete root;
+        }
+        else{
+            delete root;
+        }
     }
-    
-
+        
 
 
 }
@@ -158,6 +166,7 @@ int main(){
     cout<<endl;
 	
 	btfree(root);
+
 	return (0);
 }
 
